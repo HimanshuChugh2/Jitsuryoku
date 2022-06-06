@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">  
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+  <head th:replace="fragments/header :: headHeader">
+
+
+
+ 
+</head>
+<body>
+  
+<div th:replace="fragments/header :: navForViewer">
+
+</div>
+
+  <h1></h1>
+<div   class="alert alert-primary m-5" style="max-width:300px;">
+<h4> Login Successful !</h4>
+<hr>
+ <span> Your email address <b><span th:text="${email}"></span></b> is saved.</span>
+<br><br>
+<span> Your system generated username is <b><span th:text="${user_profile_name}"></span></b>, however you can change it anytime.</span>
+<i class="far fa-laugh-wink fa-2x" style="color:black"></i>
+
+
+</div>
+
+
+
+<script>
+		
+			
+			//document.getElementById("userprofilenameHeader").innerText=sessionStorage.getItem("userprofilename"); 
+			
+			
+	
+	
+	</script>
+</body>
+</html>
