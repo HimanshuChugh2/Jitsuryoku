@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import nec.jr.dao.SignUpUserDetails;
+ import nec.jr.dao.SignUpUserDetails;
 
   
 @Controller
@@ -14,7 +14,10 @@ public class HomeController {
  
 	
 	
-	  @GetMapping("/index") public String funindex() { return "index"; }
+	@GetMapping("/index")
+	public String funindex() {
+		return "index";
+	}
 	  
 	  @GetMapping("/")
 	    public String root(Model model) {
@@ -25,7 +28,14 @@ public class HomeController {
 	        return "accessible";
 	    }
 
-	  
+
+	 	@GetMapping("/ask-question")
+		public String askQuestion(Model model)
+		{
+			
+		 	
+			return "ask-question";
+		}
 	  @GetMapping("/accessible")
 	  public String accessible()
 	  {

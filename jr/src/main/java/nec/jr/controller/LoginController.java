@@ -106,10 +106,10 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String loginGet(Model model ) {
-
+		
 		SignUpUserDetails objDetails=new SignUpUserDetails();
 	    model.addAttribute("signUpUser",objDetails);
-
+	    
 	    
 		return "login";
 	}
@@ -120,9 +120,6 @@ public class LoginController {
 	@GetMapping("/user")
 	@ResponseBody
 	public /*Map<String, Object>*/ String user( Model model) {
-		
-		
-		
 		
 		/*if(principal!=null) 
 		{*/
@@ -196,6 +193,15 @@ public class LoginController {
 	 
  
 		return "restricted";
+	}
+ 	 
+	
+	@GetMapping("/restricted2")
+	public String restricted2(Model model)
+	{ 		 
+	 
+ 
+		return "restricted2";
 	}
 }
 

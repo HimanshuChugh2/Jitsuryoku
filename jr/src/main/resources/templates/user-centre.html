@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>User Centre</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<base href="/" />
+</head>
+<link href="/mystylesheet.css" th:href="@{css/modalpopup.css}"
+	rel="stylesheet" type="text/css">
+<link href="/mycss.css" th:href="@{css/typewriter-effect.css}"
+	rel="stylesheet" type="text/css" />
+
+<head th:replace="fragments/header :: headHeader">
+
+</head>
+
+<head th:replace="fragments/header :: quillScriptFiles">
+</head>
+<body>
+
+	<div th:replace="fragments/header :: navForViewer"></div>
+	<div>
+		<form  >
+
+			<h1>User</h1>
+		</form>
+	</div>
+
+   
+
+</body>
+</html>

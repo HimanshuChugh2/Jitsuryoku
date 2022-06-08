@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import nec.jr.dao.SignUpUserDetails;
+import nec.jr.dao.SignUpUserDetailsImpl;
 import nec.jr.repository.JPASignUpRepository;
  
 
@@ -37,7 +38,7 @@ import nec.jr.repository.JPASignUpRepository;
  //here we are calling that constructer method to get the values here (MyUserDetails class is same as SignUp entity) this constructor method will convert the object to appropriate UserDetails object
       
 
-         return user.map(SignUpUserDetails::new).get();
+         return user.map(SignUpUserDetailsImpl::new).get();
      }
  	
 	/*
