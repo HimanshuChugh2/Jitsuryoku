@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>User Centre</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<base href="/" />
+</head>
+<link href="/mystylesheet.css" th:href="@{css/modalpopup.css}"
+	rel="stylesheet" type="text/css">
+<link href="/mycss.css" th:href="@{css/typewriter-effect.css}"
+	rel="stylesheet" type="text/css" />
+
+<head th:replace="fragments/header :: headHeader">
+
+</head>
+
+
+<body>
+
+	<div th:replace="fragments/header :: navForViewer"></div>
+	<div>
+		<form>
+			<div class="container">
+				<h1>Add skill</h1>
+
+				<div class="form-group row">
+					<label for="skillName" class="col-sm-2 col-form-label">Skill
+						category</label>
+					<div class="form-group col-md-4">
+						<select id="skillCategory" class="form-control">
+							<option>Select skill category</option>
+							<option>Language</option>
+							<option>Development</option>
+
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="skillName" class="col-sm-2 col-form-label">Skill
+						name</label>
+					<div class="form-group col-md-4">
+						<select id="skillName" class="form-control">
+							<option>Select skill</option>
+							<option>...</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="currentlevel" class="col-sm-2 col-form-label">Current
+						Level</label>
+					<div class="form-group col-md-4">
+						<select id="currentlevel" class="form-control">
+							<option>Select level</option>
+							<option>Beginner</option>
+							<option>Intermediate</option>
+							<option>Advanced</option>
+						</select>
+					</div>
+				</div>
+
+
+
+				<div class="form-group row">
+
+					<label for="certificationFile" class="col-sm-2 col-form-label">Certification</label>
+					<div class="form-group col-md-4">
+						<input type="file" class="form-control-file"
+							id="certificationFile">
+						<button id="upload-button" onclick="uploadFile()">Upload
+						</button>
+
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="certificationDate" class="col-sm-2 col-form-label">Certification
+						date</label>
+					<div class="form-group col-md-4">
+						<input type="date" id="certificationDate">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" id="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+				 <textarea id="base64textarea" 
+                  placeholder="Base64 will appear here" 
+                  cols="50" rows="15"></textarea>
+			</div>
+		</form>
+	</div>
+
+ <div id="footer" th:replace="fragments/header :: footerBlack"></div>
+
+</body>
+<!-- Ajax JavaScript File Upload to Spring Boot Logic -->
+<!-- https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
+ -->
+ <script type="text/javascript">
+/* const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+async function Main() {
+   const file = document.querySelector('#certificationFile').files[0];
+   console.log(await toBase64(file));
+   return await toBase64(file);
+}
+ */
+
+ var handleFileSelect = function(evt) {
+	    var files = evt.target.files;
+	    var file = files[0];
+
+	    if (files && file) {
+	        var reader = new FileReader();
+
+	        reader.onload = function(readerEvt) {
+	            var binaryString = readerEvt.target.result;
+	            document.getElementById("base64textarea").value = btoa(binaryString);
+	        };
+
+	        reader.readAsBinaryString(file);
+	    }
+	};
+
+	if (window.File && window.FileReader && window.FileList && window.Blob) {
+	    document.getElementById('certificationFile')
+	            .addEventListener('change', handleFileSelect, false);
+	} else {
+	    alert('The File APIs are not fully supported in this browser.');
+	}
+ 
+ 
+
+	$("#submit").click(function() {
+		var skillData = {};
+	 	alert("cliked on ssubmit")
+		skillData["skillName"] = $("#skillName").val();
+		skillData["currentlevel"] = $("#currentlevel").val();
+		skillData["certificationFile"] =  $("#base64textarea").val();
+		skillData["fileName"] = "fileName";
+		skillData["certificationDate"] = $("#certificationDate").val();
+		skillData["skillCategory"] = $("#skillCategory").val();
+
+		/* alert(JSON.stringify(questionResponse)); */
+		$.ajax({
+			type : "POST",
+			contentType : "application/json; charset=UTF-8",
+			url : "user-centre/add-skill",
+			data : JSON.stringify(skillData),
+			dataType : 'json',
+
+		})
+		console.log("DONE")
+	}
+	);
+</script>
+</html>

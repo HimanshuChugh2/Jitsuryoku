@@ -52,7 +52,7 @@
 						Admin Centre <span class="sr-only"></span>
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="user-centre">
+				<li class="nav-item"><a class="nav-link" href="/user-centre">
 						<i class="fa-solid fa-user"></i></i> User Centre <span
 						class="sr-only"></span>
 				</a></li>
@@ -61,12 +61,17 @@
 				<li class="nav-item m-0">
 					<!--       	 <a id="userprofilenameHeader" class="nav-link" th:href="@{/{username}(username = ${user_profile_name})/edit}" th:value="${user_profile_name}"> -->
 
-					<!-- <a id="userprofilenameHeader" class="nav-link"
+					<a id="userprofilenameHeader" class="nav-link"
 					th:value="${user_profile_name}"> </a>
- -->
+
 				</li>
 			</ul>
-
+			<div >
+				<Button 
+					class="btn btn-outline-light my-2 my-sm-0">
+					Home<span class="sr-only"></span> <i class="fas fa-home-alt"></i>
+				</Button>
+			</div>
 			<div class="authenticated " style="display: none">
 				<Button onClick="logout()"
 					class="btn btn-outline-light my-2 my-sm-0">
@@ -80,11 +85,12 @@
 					class="fas fa-sign-in-alt"></i> Login / Sign up
 				</a>
 			</div>
+			
 		</div>
 	</nav>
 
 	<script>
-/* 		var logout = function() {
+		var logout = function() {
 			$
 					.post(
 							"/logout",
@@ -99,14 +105,14 @@
 								console.log("clicked on logout2")
 							})
 			return true;
-		} */
+		}
 
-		/* console
+		console
 				.log("VALUE ADDED IS "
 						+ localStorage.getItem("userprofilename"))
-	 */	//i have stored the userprofile name in a js session to make it available on all pages across the webapp
+		//i have stored the userprofile name in a js session to make it available on all pages across the webapp
 		//using session to use the userprofile name in all html pages
-/* 		console.log("script")
+		console.log("script")
 		if (typeof (Storage) !== "undefined") {
 
 			if (localStorage.getItem("userprofilename") == null
@@ -195,7 +201,7 @@
 		} else {
 			document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
 		}
- */
+
 		/* 			//setting the value of header link of userprofile name to the value which is stored in the above js session,
 		 * after login the default value of the "userprofilename tab" in header will not be used, after login, a session value will be stored in js session which will contain the userprofilename, this value will be used for populating the  "userprofilename tab" of header
 		 using js session because model value is limited to one html page, js session can be used globally 
@@ -231,27 +237,29 @@
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="/user-centre">
-						<i class="fa-solid fa-user"></i></i> User Centre <span
+						<i class="fa-solid fa-user"></i>User Centre <span
 						class="sr-only"></span>
 				</a></li>
-
-
 
 				<li class="nav-item m-0">
 					<!--       	 <a id="userprofilenameHeader" class="nav-link" th:href="@{/{username}(username = ${user_profile_name})/edit}" th:value="${user_profile_name}"> -->
 
-					<!-- <a id="userprofilenameHeader" class="nav-link"
+					<a style="display:none" id="userprofilenameHeader" class="nav-link"
 					th:value="${user_profile_name}"> </a>
- -->
+
 				</li>
 			</ul>
-
+			<div class="mr-2">
+				<Button 
+					class="btn btn-outline-light my-2 my-sm-0">
+					Home<span class="sr-only"></span> <i class="fas fa-home-alt"></i>
+				</Button>
+			</div>
+			
 			<div class="authenticated " style="display: none">
 				<Button onClick="logout()"
 					class="btn btn-outline-light my-2 my-sm-0">
 					Logout<span class="sr-only"></span> <i class="fas fa-sign-out-alt"></i>
-
-
 				</Button>
 			</div>
 			<div class="unauthenticated">
@@ -422,8 +430,8 @@
 
 			<!-- put the top 5 articles by this user and top 5 catagories by this user in the side bar 
  -->
-		<!-- 	<a id="userprofilenameHeader" class="navbar-brand"
-				th:value="${user_profile_name}" style="font-size: 1.2rem"></a> -->
+			<a id="userprofilenameHeader" class="navbar-brand"
+				th:value="${user_profile_name}" style="font-size: 1.2rem"></a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">

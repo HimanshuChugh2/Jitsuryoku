@@ -25,7 +25,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "sign_up")
 public class SignUpUserDetails {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -40,7 +39,20 @@ public class SignUpUserDetails {
 	private String name;
 
 	private String role = "ROLE_ADMIN";
- 
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
+	private String userhomepagedata;
+
+	@Size(min = 3, max = 30)
+	private String password;
+
+	@NotBlank
+	@Size(min = 5, max = 50, message = "-> Name must be greater than 3 characters ")
+	@Email
+	private String username;
+
+	private boolean emailverified;
+
 	public SignUpUserDetails(int id,
 			@Size(min = 1, max = 50, message = "-> User Profile Name must be greater than 1 character") @Pattern(regexp = "^[\\$#\\+{}:\\?\\.\\_,~\"a-zA-Z0-9]+$", message = "-> It must be an appropriate name. \n\n <br/> <hr/> It should not contain whitespace.\r\n Special charaters like 'period' and 'underscore' are only allowed") String userProfileName,
 			String name, String role, String userhomepagedata, @Size(min = 3, max = 30) String password,
@@ -57,42 +69,10 @@ public class SignUpUserDetails {
 		this.emailverified = emailverified;
 	}
 
-	@Lob
-	@Type(type = "org.hibernate.type.TextType")
-	private String userhomepagedata;
-
- 
-
-	public SignUpUserDetails(int id,
-			@Size(min = 1, max = 50, message = "-> User Profile Name must be greater than 1 character") @Pattern(regexp = "^[\\$#\\+{}:\\?\\.\\_,~\"a-zA-Z0-9]+$", message = "-> It must be an appropriate name. \n\n <br/> <hr/> It should not contain whitespace.\r\n Special charaters like 'period' and 'underscore' are only allowed") String userProfileName,
-			String name, String userhomepagedata, @Size(min = 3, max = 30) String password,
-			@NotBlank @Size(min = 5, max = 50, message = "-> Name must be greater than 3 characters ") @Email String username,
-			boolean emailverified) {
-		super();
-		this.id = id;
-		this.userProfileName = userProfileName;
-		this.name = name;
-		this.userhomepagedata = userhomepagedata;
-		this.password = password;
-		this.username = username;
-		this.emailverified = emailverified;
-	}
-
-	@Size(min = 3, max = 30)
-	private String password;
-
-	@NotBlank
-	@Size(min = 5, max = 50, message = "-> Name must be greater than 3 characters ")
-	@Email
-	private String username;
-
-	private boolean emailverified;
-
 	public boolean isEmailverified() {
 		return emailverified;
 	}
 
-	 
 	/*
 	 * private int workingHours; private int commuteTime; private int workoutTime;
 	 * private int mealTime;
@@ -104,79 +84,61 @@ public class SignUpUserDetails {
 		super();
 	}
 
- 
- 
-
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getUserProfileName() {
 		return userProfileName;
 	}
-
 
 	public void setUserProfileName(String userProfileName) {
 		this.userProfileName = userProfileName;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getRole() {
 		return role;
 	}
-
 
 	public void setRole(String role) {
 		this.role = role;
 	}
 
-
 	public String getUserhomepagedata() {
 		return userhomepagedata;
 	}
-
 
 	public void setUserhomepagedata(String userhomepagedata) {
 		this.userhomepagedata = userhomepagedata;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public void setEmailverified(boolean emailverified) {
 		this.emailverified = emailverified;

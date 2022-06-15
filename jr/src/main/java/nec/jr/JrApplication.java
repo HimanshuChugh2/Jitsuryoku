@@ -17,5 +17,4 @@ public class JrApplication {
 	{
 		return new RestTemplate();
 	}
-
 }

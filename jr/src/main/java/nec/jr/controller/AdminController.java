@@ -11,9 +11,6 @@ public class AdminController {
 		return "admin-centre";
 	}
 	
-	@GetMapping("/user-centre")
-	public String usercentre() {
-		return "user-centre";
-	}
+ 
 
 }
