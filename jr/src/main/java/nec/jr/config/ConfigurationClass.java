@@ -2,6 +2,7 @@ package nec.jr.config;
 
 import javax.annotation.Resource;
 
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -66,32 +67,22 @@ public class ConfigurationClass extends WebSecurityConfigurerAdapter {
 				 */
 	        
 	        
-	        .logout(l -> l
+		  .logout(l -> l
 	                .logoutSuccessUrl("/").permitAll()
 	             )
-            .authorizeRequests(a -> a
+          .authorizeRequests(a -> a
             		.antMatchers("/user-centre").hasAnyRole("USER","ADMIN")
             		.antMatchers("/admin-centre").hasAnyRole("ADMIN")
-            		.antMatchers("/", "/error", "/webjars/**","/error-pages/**","/signup","/user", "/accessible","/enter-existing-password","/showit","/css/style.css","/index").permitAll()
-                
-                
-                
-            )
+            		.antMatchers("/", "/error", "/webjars/**","/error-pages/**","/signup","/user", "/accessible","/enter-existing-password","/showit","/css/style.css","/index","/login").permitAll()
+            		 
+        		  )
+           
 				/* 
 				 * .exceptionHandling(e -> e .authenticationEntryPoint(new
 				 * HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) )
 				 */ 
-				.formLogin().defaultSuccessUrl("/restricted").loginPage("/login")
-			     .and()
-				.rememberMe()
-			      .key("rem-me-key")
-			      .rememberMeParameter("remember") // it is name of checkbox at login page  
-			      .rememberMeCookieName("rememberlogin") // it is name of the cookie  
-			      .tokenValiditySeconds(1000000000) // remember for number of seconds  
-				 .and()
-/*				 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//.tokenValiditySeconds(100) // remember for number of seconds 
-*/				 ;
-        // @formatter:on
+				.formLogin().defaultSuccessUrl("/restricted").loginPage("/login").permitAll();
+				//.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
 	/*

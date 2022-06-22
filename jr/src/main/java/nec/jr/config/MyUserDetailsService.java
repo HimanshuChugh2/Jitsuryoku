@@ -14,13 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import nec.jr.dao.SignUpUserDetails;
-import nec.jr.dao.SignUpUserDetailsImpl;
+import nec.jr.entity.SignUpUserDetails;
+import nec.jr.entity.SignUpUserDetailsImpl;
 import nec.jr.repository.JPASignUpRepository;
  
 
  @Service
-   public class MyUserDetailsService implements UserDetailsService {
+  public class MyUserDetailsService implements UserDetailsService {
 
  	@Autowired
  	JPASignUpRepository jpaSignUpRepository;

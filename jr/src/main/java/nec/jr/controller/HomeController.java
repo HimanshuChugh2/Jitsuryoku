@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
- import nec.jr.dao.SignUpUserDetails;
+ import nec.jr.entity.SignUpUserDetails;
 
   
 @Controller

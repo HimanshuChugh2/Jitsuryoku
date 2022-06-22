@@ -14,9 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
  
 import org.springframework.web.bind.annotation.RequestParam;
- import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestTemplate;
 
-import nec.jr.dao.SignUpUserDetails;
+import nec.jr.entity.SignUpUserDetails;
 import nec.jr.repository.JPASignUpRepository;
  
 

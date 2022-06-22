@@ -55,9 +55,11 @@
 					<div class="form-group col-md-4">
 						<select id="currentlevel" class="form-control">
 							<option>Select level</option>
-							<option>Beginner</option>
-							<option>Intermediate</option>
-							<option>Advanced</option>
+							<option>L0</option>
+							<option>L1</option>
+							<option>L2</option>
+							<option>L3</option>
+							<option>L4</option>
 						</select>
 					</div>
 				</div>
@@ -88,69 +90,66 @@
 						<button type="submit" id="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
-				 <textarea id="base64textarea" 
-                  placeholder="Base64 will appear here" 
-                  cols="50" rows="15"></textarea>
+				<textarea id="base64textarea" placeholder="Base64 will appear here"
+					cols="50" rows="15"></textarea>
 			</div>
 		</form>
 	</div>
 
- <div id="footer" th:replace="fragments/header :: footerBlack"></div>
+	<div id="footer" th:replace="fragments/header :: footerBlack"></div>
 
 </body>
 <!-- Ajax JavaScript File Upload to Spring Boot Logic -->
 <!-- https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
  -->
- <script type="text/javascript">
-/* const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+<script type="text/javascript">
+	/* const toBase64 = file => new Promise((resolve, reject) => {
+	 const reader = new FileReader();
+	 reader.readAsDataURL(file);
+	 reader.onload = () => resolve(reader.result);
+	 reader.onerror = error => reject(error);
+	 });
 
-async function Main() {
-   const file = document.querySelector('#certificationFile').files[0];
-   console.log(await toBase64(file));
-   return await toBase64(file);
-}
- */
+	 async function Main() {
+	 const file = document.querySelector('#certificationFile').files[0];
+	 console.log(await toBase64(file));
+	 return await toBase64(file);
+	 }
+	 */
 
- var handleFileSelect = function(evt) {
-	    var files = evt.target.files;
-	    var file = files[0];
+	var handleFileSelect = function(evt) {
+		var files = evt.target.files;
+		var file = files[0];
 
-	    if (files && file) {
-	        var reader = new FileReader();
+		if (files && file) {
+			var reader = new FileReader();
 
-	        reader.onload = function(readerEvt) {
-	            var binaryString = readerEvt.target.result;
-	            document.getElementById("base64textarea").value = btoa(binaryString);
-	        };
+			reader.onload = function(readerEvt) {
+				var binaryString = readerEvt.target.result;
+				document.getElementById("base64textarea").value = btoa(binaryString);
+			};
 
-	        reader.readAsBinaryString(file);
-	    }
+			reader.readAsBinaryString(file);
+		}
 	};
 
 	if (window.File && window.FileReader && window.FileList && window.Blob) {
-	    document.getElementById('certificationFile')
-	            .addEventListener('change', handleFileSelect, false);
+		document.getElementById('certificationFile').addEventListener('change',
+				handleFileSelect, false);
 	} else {
-	    alert('The File APIs are not fully supported in this browser.');
+		alert('The File APIs are not fully supported in this browser.');
 	}
- 
- 
 
 	$("#submit").click(function() {
 		var skillData = {};
-	 	alert("cliked on ssubmit")
 		skillData["skillName"] = $("#skillName").val();
 		skillData["currentlevel"] = $("#currentlevel").val();
-		skillData["certificationFile"] =  $("#base64textarea").val();
 		skillData["fileName"] = "fileName";
 		skillData["certificationDate"] = $("#certificationDate").val();
 		skillData["skillCategory"] = $("#skillCategory").val();
+  		skillData["certificationFile"] = $("#base64textarea").val();
 
+ 		
 		/* alert(JSON.stringify(questionResponse)); */
 		$.ajax({
 			type : "POST",
@@ -161,7 +160,6 @@ async function Main() {
 
 		})
 		console.log("DONE")
-	}
-	);
+	});
 </script>
 </html>

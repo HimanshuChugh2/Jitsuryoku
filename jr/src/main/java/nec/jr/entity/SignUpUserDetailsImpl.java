@@ -1,4 +1,4 @@
-package nec.jr.dao;
+package nec.jr.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -22,42 +22,57 @@
 		<form>
 			<div class="container">
 				<h1>Profile ~ Username</h1>
-
 				<table class="table">
+					<!-- 	<span> <a th:text="${skillDataList[0].id}"
+						th:href="@{/discuss/{id}(id = ${skillDataList[0]})}"></a>
+					</span> -->
 					<thead>
 						<tr>
 							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
+							<th scope="col">ID</th>
+							<th scope="col">Username</th>
+							<th scope="col">Skill category</th>
+							<th scope="col">Skill name</th>
+							<th scope="col">Current level</th>
+							<th scope="col">Certification File</th>
 						</tr>
 					</thead>
-					<tbody>
+
+
+
+					<tbody th:each="skillDataList,iter : ${skillDataList}">
 						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
+							<th th:text="${iter.index}+1" scope="row">1</th>
+							<td th:text="${skillDataList.id}"></td>
+							<td th:text="${skillDataList.username}"></td>
+							<td th:text="${skillDataList.skillCategory}"></td>
+							<td th:text="${skillDataList.skillName}"></td>
+							<td th:text="${skillDataList.currentLevel}"></td>
+
+
+							<td><span
+								th:switch="${skillDataList.certificationFileUploadedFlag}">
+									<i th:case="true"> <a th:href="@{/user-centre/user-profile/download-file/{id}(id=${skillDataList.id})}">Click
+											to download</a>
+								</i> <i th:case="false">file unavailable</i>
+							</span> <span th:text="${skillDataList.id}"> </span> <a
+								href=></a></td>
+							 
+
+
+							<!-- <td th:text="${skillDataList[0].skillName}">Mark</td> -->
+
+							<!-- <td th:text="${skillDataList[0].}">Mark</td>   -->
+
+							<!-- <td>@mdo</td> -->
 						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>
-							<a href="hi">@twitter</a></td>
-						</tr>
+
 					</tbody>
 				</table>
 			</div>
+
 		</form>
 	</div>
 </body>
 
-</script>
 </html>

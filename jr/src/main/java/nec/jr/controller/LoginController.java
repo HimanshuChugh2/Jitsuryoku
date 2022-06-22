@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
- import nec.jr.dao.SignUpUserDetails;
+ import nec.jr.entity.SignUpUserDetails;
 import nec.jr.repository.JPASignUpRepository; 
 
 @SessionAttributes("{useremail,userprofilename}")
