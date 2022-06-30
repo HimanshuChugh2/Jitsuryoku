@@ -81,11 +81,11 @@ import nec.jr.repository.JPASignUpRepository;
 	  		
 	  	/*	if(reCaptchaResponse.isSuccess())
 	  		{*/
-	  			String userProfileName=signUpUser.getUsername().substring(0,signUpUser.getUsername().indexOf("@"));
- 	  			 signUpUser.setUserProfileName(userProfileName);
+	  			//String userProfileName=signUpUser.getUsername().substring(0,signUpUser.getUsername().indexOf("@"));
+ 	  			 //signUpUser.setUserProfileName(userProfileName);
 	  			 jpaSignUpRepository.save(signUpUser); 
 	 			 //model.addAttribute("user_profile_name",signUpUser.getUserProfileName());
-	  			  model.put("SignUpSuccessMessage", "User added successfully " + signUpUser.getUserProfileName()+ ". Please proceed with Sign in "); 		
+	  			//  model.put("SignUpSuccessMessage", "User added successfully " + signUpUser.getUserProfileName()+ ". Please proceed with Sign in "); 		
 	  			
 	  			  return "login";
 			} 

@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -62,13 +63,13 @@ public class SkillService {
 
 		Skill skill = new Skill();
 		CertificationFiles certificationFiles = new CertificationFiles();
-		
-		//populating Cert
+
+		// populating Cert
 		certificationFiles.setFileName(getLoggedInUserName() + "_" + certificationFileAndSkill.getSkillName()); // sets
 		certificationFiles.setUsername(getLoggedInUserName());
 		certificationFiles.setCertificationFile(certificationFileAndSkill.getCertificationFile());
-		
-		//populating Skill
+
+		// populating Skill
 		skill.setUsername(getLoggedInUserName());
 		skill.setCertificationDate(certificationFileAndSkill.getCertificationDate());
 
@@ -84,8 +85,7 @@ public class SkillService {
 		skill.setSkillCategory(certificationFileAndSkill.getSkillCategory());
 		skill.setSkillName(certificationFileAndSkill.getSkillName());
 		skill.setTheCertificationFiles(certificationFiles);
-		
-		
+
 		certificationFileRepository.save(certificationFiles);
 
 		logger.info("id is ************** " + skillRepository.save(skill).getId());
@@ -107,15 +107,26 @@ public class SkillService {
 	 * https://stackoverflow.com/questions/71498811/how-to-decode-file-from-base64-
 	 * in-spring-boot-java
 	 */
-	public String downloadFile(String base64) throws Exception {
+	public String downloadFile(Integer fileId) throws Exception {
 		// If you are using Java 8 or above
 		// Note preferred way of declaring an array variable
-		System.out.println("*********DOWNLOADING**********");
+		System.out.println("*********DOWNLOADING********** " + fileId);
 		System.out.println(System.getProperty("user.home"));
+		Optional<CertificationFiles> certificationFiles = certificationFileRepository.findById(fileId);
 
+		String base64 = certificationFiles.get().getCertificationFile();
 		byte[] decodedImg = Base64.getDecoder().decode(base64.getBytes(StandardCharsets.UTF_8));
-		Path destinationFile = Paths.get(System.getProperty("user.home") + "\\Downloads", "Certificate.jpg");
+		Path destinationFile = Paths.get(System.getProperty("user.home") + "\\Downloads",
+				certificationFiles.get().getUsername() + " Certificate id " + certificationFiles.get().getId()
+						+ ".jpg");
 		Files.write(destinationFile, decodedImg);
+		return "true";
+	}
+
+	public String editSkill(Integer skillId) {
+		logger.info("*********EDITING SKILL******");
+		
+		
 		return "true";
 	}
 }

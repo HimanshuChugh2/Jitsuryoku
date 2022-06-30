@@ -33,7 +33,7 @@ public interface JPASignUpRepository extends JpaRepository<SignUpUserDetails,Int
 	@Modifying
 	@Query(value = "update sign_up set password= :password where username= :username",nativeQuery = true)
 	public void updateUsernameByUsername(@Param("password") String password, @Param("username") String username);
-
+	
 	
 
 	@Transactional

@@ -16,15 +16,23 @@ public class Skill {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
-	private int id;
+ 	private int id;
+	private int employeeId;
+	private String bandName;
+	private String managerName;
+	private String desiredLevel;
 	private String username;
 	private String skillName;
 	private String skillCategory;
 	private String currentLevel;
+
 	private boolean certificationFileUploadedFlag;
 	private String fileName;
 	private String certificationDate;
+	private boolean gap;
+	private boolean primarySkill;
+	private boolean approvalStatus;
+
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "skill_id", referencedColumnName = "id")
@@ -105,11 +113,75 @@ public class Skill {
 	}
 
 	 
-	public Skill(int id, String username, String skillName, String skillCategory, String currentLevel,
-			boolean certificationFileUploadedFlag, String fileName, String certificationDate,
+	 
+	public String getDesiredLevel() {
+		return desiredLevel;
+	}
+
+	public void setDesiredLevel(String desiredLevel) {
+		this.desiredLevel = desiredLevel;
+	}
+
+	 
+
+	public int getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getBandName() {
+		return bandName;
+	}
+
+	public void setBandName(String bandName) {
+		this.bandName = bandName;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public boolean isGap() {
+		return gap;
+	}
+
+	public void setGap(boolean gap) {
+		this.gap = gap;
+	}
+
+	public boolean isPrimarySkill() {
+		return primarySkill;
+	}
+
+	public void setPrimarySkill(boolean primarySkill) {
+		this.primarySkill = primarySkill;
+	}
+
+	public boolean isApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(boolean approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public Skill(int id, int employeeId, String bandName, String managerName, String desiredLevel, String username,
+			String skillName, String skillCategory, String currentLevel, boolean certificationFileUploadedFlag,
+			String fileName, String certificationDate, boolean gap, boolean primarySkill, boolean approvalStatus,
 			CertificationFiles theCertificationFiles) {
 		super();
 		this.id = id;
+		this.employeeId = employeeId;
+		this.bandName = bandName;
+		this.managerName = managerName;
+		this.desiredLevel = desiredLevel;
 		this.username = username;
 		this.skillName = skillName;
 		this.skillCategory = skillCategory;
@@ -117,6 +189,9 @@ public class Skill {
 		this.certificationFileUploadedFlag = certificationFileUploadedFlag;
 		this.fileName = fileName;
 		this.certificationDate = certificationDate;
+		this.gap = gap;
+		this.primarySkill = primarySkill;
+		this.approvalStatus = approvalStatus;
 		this.theCertificationFiles = theCertificationFiles;
 	}
 
@@ -124,5 +199,4 @@ public class Skill {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 }

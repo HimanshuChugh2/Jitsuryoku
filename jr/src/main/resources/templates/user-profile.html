@@ -21,7 +21,7 @@
 	<div>
 		<form>
 			<div class="container">
-				<h1>Profile ~ Username</h1>
+				<h1>Profile ~ User name</h1>
 				<table class="table">
 					<!-- 	<span> <a th:text="${skillDataList[0].id}"
 						th:href="@{/discuss/{id}(id = ${skillDataList[0]})}"></a>
@@ -30,7 +30,7 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">ID</th>
-							<th scope="col">Username</th>
+							<th scope="col">User name</th>
 							<th scope="col">Skill category</th>
 							<th scope="col">Skill name</th>
 							<th scope="col">Current level</th>
@@ -52,19 +52,19 @@
 
 							<td><span
 								th:switch="${skillDataList.certificationFileUploadedFlag}">
-									<i th:case="true"> <a th:href="@{/user-centre/user-profile/download-file/{id}(id=${skillDataList.id})}">Click
-											to download</a>
-								</i> <i th:case="false">file unavailable</i>
-							</span> <span th:text="${skillDataList.id}"> </span> <a
-								href=></a></td>
-							 
-
-
-							<!-- <td th:text="${skillDataList[0].skillName}">Mark</td> -->
-
-							<!-- <td th:text="${skillDataList[0].}">Mark</td>   -->
-
-							<!-- <td>@mdo</td> -->
+									<i th:case="true"> <input class="btn btn-link"
+										type="button"
+										th:onClick=downloadFile([[${skillDataList.theCertificationFiles.id}]])
+										data-toggle="modal" data-target="#exampleModalCenter"
+										value="Click to download" /> <!-- 											th:href="@{/user-centre/user-profile/download-file/{id}(id=${skillDataList.id})}"
+ -->
+								</i> &nbsp;&nbsp;&nbsp;<i th:case="false">File unavailable</i>
+							</span></td>
+<!-- 							<td><input type="submit" class="btn btn-link" value="edit" th:onClick=editSkill([[${skillDataList.id}]])/></td>
+ -->
+ 
+ 							<td><a href="user-centre/edit-skill" class="btn btn-link">Edit skill</a></td>
+ 
 						</tr>
 
 					</tbody>
@@ -73,6 +73,50 @@
 
 		</form>
 	</div>
+	<div th:replace="fragments/header :: modalstructure"></div>
 </body>
 
+<script>
+	function downloadFile(fileId) {
+
+		$.ajax({
+			type : "POST",
+			contentType : "application/json; charset=UTF-8",
+			url : "user-centre/download-file",
+			data : JSON.stringify(fileId),
+			dataType : 'text',
+
+		})
+		
+		function editSkill(skillId){
+			$.ajax({
+				type : "POST",
+				contentType : "application/json; charset=UTF-8",
+				url : "user-centre/edit-skill",
+				data : JSON.stringify(skillId),
+				dataType : 'text',
+			})
+		}
+
+		var modal = document.getElementById("exampleModalCenter");
+		modal.style.display = "block";
+
+		document.getElementById("modalbody").innerText = "Certificate downoaded to your Downloads folder";
+		document.getElementById("modalheader").innerText = "Success";
+
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	}
+</script>
 </html>

@@ -1,5 +1,6 @@
 package nec.jr.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.annotations.Check;
@@ -51,7 +52,12 @@ public class UserController {
 	@GetMapping("add-skill")
 	public String addSkill() {
 
-		 
+		LinkedList<Integer> chain=new LinkedList<Integer>();
+
+		
+		
+		
+		
 		logger.info("*******HELLO info**********");
 
 		return "add-skill";
@@ -78,13 +84,10 @@ public class UserController {
 		return "user-profile";
 	}
 
-	@PostMapping("/download-file")
-	public ResponseEntity<String> downloadFile(@RequestBody Skill skill, Model model) {
-		// System.out.println("*************** in controller " +
-		// skill.getCertificationFile());
-
-		System.out.println("*************** in controller " + skill.getCertificationDate());
-		//skillService.addSkill(skill);
+	@PostMapping("download-file")
+	public ResponseEntity<String> downloadFile(@RequestBody Integer fileId) throws Exception {
+		
+		skillService.downloadFile(fileId);
 		return new ResponseEntity<>("result successful result", HttpStatus.OK);
 	}
 
@@ -97,5 +100,21 @@ public class UserController {
 		skillService.addSkill(certificationFileAndSkill);
 		return new ResponseEntity<>("result successful result", HttpStatus.OK);
 	}
+	
+
+	@GetMapping("edit-skill")
+	public String editScreen() {
+		return "edit-skill";
+	}
+	
+	@PostMapping("edit-skill")
+	public ResponseEntity<String> editSkill(@RequestBody Integer skillId) throws Exception {
+		
+		if(skillService.editSkill(skillId)!="true")
+		{return new ResponseEntity<>("failed request", HttpStatus.INTERNAL_SERVER_ERROR);}
+		return new ResponseEntity<>("result successful result", HttpStatus.OK);
+	}
+	
+	
 
 }
