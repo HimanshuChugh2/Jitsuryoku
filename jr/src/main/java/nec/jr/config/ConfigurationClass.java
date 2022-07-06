@@ -43,28 +43,7 @@ public class ConfigurationClass extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
- 
-		/**/
-		 /*
-				 * .csrf(c ->
-				 * c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-				 */
-	        
-	        
 		 http.cors().and().csrf().disable()
-	        
-				/*
-				 * .logout(l -> l .logoutSuccessUrl("/").permitAll() )
-				 */
-				/*
-				 * .authorizeRequests(a -> a .antMatchers("/", "/error",
-				 * "/webjars/**","/sign-up","/index","/registration").permitAll()
-				 * 
-				 * .anyRequest().authenticated() .and() ) .exceptionHandling(e -> e
-				 * .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-				 * )
-				 */
 	        
 	        
 		  .logout(l -> l
@@ -77,24 +56,11 @@ public class ConfigurationClass extends WebSecurityConfigurerAdapter {
             		 
         		  )
            
-				/* 
-				 * .exceptionHandling(e -> e .authenticationEntryPoint(new
-				 * HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) )
-				 */ 
+ 
 				.formLogin().defaultSuccessUrl("/restricted").loginPage("/login").permitAll();
-				//.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
-	/*
-	 * .authorizeRequests() .antMatchers("/login","/","/registration").permitAll()
-	 * .anyRequest().authenticated() .and()
-	 * .oauth2Login().permitAll().defaultSuccessUrl("/restricted",true)
-	 * .and().logout() .invalidateHttpSession(true) .clearAuthentication(true)
-	 * .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	 * .logoutSuccessUrl("/login?logout") .permitAll();
-	 */
 
-	// @formatter:on
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
